@@ -12,8 +12,8 @@ export class NumberFormat {
   unit?: string
   digits: string[]
   decimalSymbol: string | undefined
-  groupingSymbol: string
-  minusSymbol: string
+  groupingSymbol: string | undefined
+  minusSymbol: string | undefined
   minimumFractionDigits: number
   maximumFractionDigits: number
   prefix: string
@@ -23,16 +23,17 @@ export class NumberFormat {
   constructor(options: NumberInputOptions) {
     const { formatStyle: style, currency, unit, locale, precision } = options
     const numberFormat = new Intl.NumberFormat(locale, { currency, unit, style })
-    const ps = numberFormat.format(123456)
+    const parts = numberFormat.formatToParts(-123456.768)
+    const ps = numberFormat.formatToParts(-123456.768)
 
     this.locale = locale
     this.style = style
     this.currency = currency
     this.unit = unit
     this.digits = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((i) => i.toLocaleString(locale))
-    this.decimalSymbol = count(ps, this.digits[0]) ? ps.substr(ps.indexOf(this.digits[6]) + 1, 1) : undefined
-    this.groupingSymbol = ps.substr(ps.indexOf(this.digits[3]) + 1, 1)
-    this.minusSymbol = substringBefore(Number(-1).toLocaleString(locale), this.digits[1])
+    this.decimalSymbol = parts?.find(part => part.type === 'decimal')?.value
+    this.groupingSymbol = parts?.find(part => part.type === 'group')?.value
+    this.minusSymbol = parts?.find(part => part.type === 'minusSign')?.value
 
     if (this.decimalSymbol === undefined) {
       this.minimumFractionDigits = this.maximumFractionDigits = 0
@@ -43,9 +44,10 @@ export class NumberFormat {
       this.maximumFractionDigits = numberFormat.resolvedOptions().maximumFractionDigits
     }
 
-    this.prefix = substringBefore(ps, this.digits[1])
-    this.negativePrefix = substringBefore(numberFormat.format(-1), this.digits[1])
-    this.suffix = ps.substring(ps.lastIndexOf(this.decimalSymbol ? this.digits[0] : this.digits[6]) + 1)
+    // get the parts before integer, after minussign
+    this.prefix = parts?.slice(1, parts?.findIndex(part => part.type === 'integer')).map(part => part.value).join('')
+    this.negativePrefix = parts?.slice(0, parts?.findIndex(part => part.type === 'integer')).map(part => part.value).join('')
+    this.suffix = parts?.slice(parts?.findIndex(part => part.type === 'fraction') + 1).map(part => part.value).join('')
   }
 
   parse(str: string | null): number | null {
