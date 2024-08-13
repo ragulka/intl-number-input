@@ -1,5 +1,31 @@
 # Changelog
 
+## [1.5.0](https://github.com/ragulka/intl-number-input/compare/v1.4.1...v1.5.0) (2024-08-13)
+
+
+### Features
+
+* add `destroy` function for removing event listeners (closes [#18](https://github.com/ragulka/intl-number-input/issues/18)) ([d604433](https://github.com/ragulka/intl-number-input/commit/d60443317f193d9bfeef714ecd49b3698f15687e))
+* add API docs ([108f843](https://github.com/ragulka/intl-number-input/commit/108f8435dd9ddcb8fcf87362d9cea329d6037bdb))
+* add new options `currencyDisplay` and `unitDisplay` ([ce38d4e](https://github.com/ragulka/intl-number-input/commit/ce38d4ec12a302258c6347f143d85e43477f62bf))
+* add percent format style ([#1](https://github.com/ragulka/intl-number-input/issues/1)) ([3035d1e](https://github.com/ragulka/intl-number-input/commit/3035d1ea8b6f0ee303dd843b098c7b661a37052b))
+* **formatStyle:** use decimal as default ([b87cd94](https://github.com/ragulka/intl-number-input/commit/b87cd947f18edd5d08105e3dcbaaae918de285c4))
+* support precision range ([#5](https://github.com/ragulka/intl-number-input/issues/5)) ([3bdc5c4](https://github.com/ragulka/intl-number-input/commit/3bdc5c41fd6d610c859019c8a75f62bbbd729720))
+
+
+### Bug Fixes
+
+* **autoDecimalDigits:** use the maximumFractionDigits of the number format ([18cfb28](https://github.com/ragulka/intl-number-input/commit/18cfb28da6152b815c8c6b2a4820c5175c1042c8))
+* decimal/grouping separator not detected in percent format style ([bb81ba0](https://github.com/ragulka/intl-number-input/commit/bb81ba03130a1ed4fee733cd181483ac110bdf7e))
+* fix pluralization when using full currency/unit names ([fab0e93](https://github.com/ragulka/intl-number-input/commit/fab0e93495ab741f37396f5d4aae6bb709d02b07))
+* improve detection of decimal/grouping separator ([291d841](https://github.com/ragulka/intl-number-input/commit/291d841a09394924368e160b39cca167db2c1182))
+* **percent format style:** fix calculation of default step (closes [#20](https://github.com/ragulka/intl-number-input/issues/20)) ([b724817](https://github.com/ragulka/intl-number-input/commit/b724817a4f4c27fa6a925d769f112647aa212b04))
+* **percent formatStyle:** parsing causes accuracy issues with higher precisions ([2b2f8c3](https://github.com/ragulka/intl-number-input/commit/2b2f8c3bde1316d2b20d9a287bd0c1d7b9465af6))
+* prevent caret position from jumping to the end ([73904c2](https://github.com/ragulka/intl-number-input/commit/73904c208db8e1ca982a209e29d5d175cb4aeeed))
+* prevent input of too large numbers ([9283033](https://github.com/ragulka/intl-number-input/commit/928303320af0b670a731b6fd753e48904c1aac69))
+* set correct caret position on focus when using `autoDecimalDigits` ([549fa48](https://github.com/ragulka/intl-number-input/commit/549fa484d59866429573e9cca0f757c3745b41b8))
+* update bundle file extensions (closes [#15](https://github.com/ragulka/intl-number-input/issues/15)) ([8eb38a3](https://github.com/ragulka/intl-number-input/commit/8eb38a3c977150217954621eda2d5f00c2dc1a2c))
+
 ## [1.4.1](https://github.com/dm4t2/intl-number-input/compare/v1.4.0...v1.4.1) (2023-10-29)
 
 
